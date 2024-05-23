@@ -36,4 +36,4 @@ jobs:
           with:
             image: "pythonimage:latest"
     call-workflow-passing-data:
-          uses: ./.github/workflows/reusable.yml
+          uses: ./.github/workflows/reusable.yml@main
