@@ -1,9 +1,11 @@
 on:
-    workflow_call:
-      inputs:
-        config-path:
-          required: true
-          type: string
-      secrets:
-        envPAT:
-          required: true
+    workflow_call: 
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+        - name: create Docker image
+          run: docker build -t pythonimage .
+        - name: run docker image
+          run: docker run pythonimage
