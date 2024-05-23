@@ -38,4 +38,4 @@ jobs:
         - name: Scan image
           uses: anchore/scan-action@v3
           with:
-            image: "localbuild/pythonimage:latest"
+            image: "pythonimage:latest"
