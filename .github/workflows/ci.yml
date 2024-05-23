@@ -19,8 +19,23 @@ jobs:
             name: bandit-scan-results
             path: bandit_report.txt
           if: ${{ always() }}
+
         - name: create Docker image
           run: docker build -t pythonimage .
         - name: run docker image
           run: docker run pythonimage
 
+        # - name: Set up Docker Buildx
+        #   uses: docker/setup-buildx-action@v2
+        
+        # - name: build local container
+        #   uses: docker/build-push-action@v4
+        #   with:
+        #     tags: localbuild/pythonimage
+        #     push: false
+        #     load: true
+        
+        - name: Scan image
+          uses: anchore/scan-action@v3
+          with:
+            image: "localbuild/pythonimage"
