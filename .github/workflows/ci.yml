@@ -1,39 +1,6 @@
 name: Deploy
 on: 
-    push:
+  push:
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-        - name: checkout repository
-          uses: actions/checkout@v4
-        - name: install dependencies
-          run: pip install -r requirements.txt
-        - name: Run security scan with Bandit 
-          run: |
-            pip install bandit
-            bandit -r src -o bandit_report.txt -f txt 
-        - name: Upload Bandit scan results
-          uses: actions/upload-artifact@v4
-          with:
-            name: bandit-scan-results
-            path: bandit_report.txt
-          if: ${{ always() }}
-
-
-        # - name: Set up Docker Buildx
-        #   uses: docker/setup-buildx-action@v2
-        
-        # - name: build local container
-        #   uses: docker/build-push-action@v4
-        #   with:
-        #     tags: localbuild/pythonimage
-        #     push: false
-        #     load: true
-        
-        - name: Scan image
-          uses: anchore/scan-action@v3
-          with:
-            image: "pythonimage:latest"
-    call-workflow-passing-data:
-          uses: ./.github/workflows/reusable.yml@main
+  call-workflow-passing-data:
+    uses: ./.github/workflows/reusable.yml
